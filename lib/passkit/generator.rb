@@ -129,6 +129,7 @@ module Passkit
 
     # :nocov:
     def sign_manifest
+      OpenSSL::Provider.load("legacy")
       p12_certificate = OpenSSL::PKCS12.new(File.read(CERTIFICATE), CERTIFICATE_PASSWORD)
       intermediate_certificate = OpenSSL::X509::Certificate.new(File.read(INTERMEDIATE_CERTIFICATE))
 
