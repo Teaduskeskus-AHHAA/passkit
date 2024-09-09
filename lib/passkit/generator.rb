@@ -156,15 +156,19 @@ module Passkit
 
     def compress_pass_file
       zip_path = TMP_FOLDER.join("#{@pass.file_name}.pkpass")
-      zipped_file = File.open(zip_path, "w")
-
-      Zip::OutputStream.open(zipped_file.path) do |z|
-        Dir.glob(@temporary_path.join("**")).each do |file|
+    
+      # Open the .pkpass file in binary mode
+      Zip::OutputStream.open(zip_path.to_s) do |z|
+        # Ensure we're only adding files, not directories
+        Dir.glob(@temporary_path.join("**/*")).each do |file|
+          next if File.directory?(file) # Skip directories
+    
           z.put_next_entry(File.basename(file))
-          z.print File.read(file)
+          # Open and write the file content in binary mode
+          z.write File.binread(file)
         end
       end
+    
       zip_path
-    end
   end
 end
