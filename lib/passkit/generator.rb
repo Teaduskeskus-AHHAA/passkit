@@ -131,9 +131,9 @@ module Passkit
     # :nocov:
     def sign_manifest
      # p12_certificate = OpenSSL::PKCS12.new(File.read(CERTIFICATE), CERTIFICATE_PASSWORD)
-      p12_certificate = OpenSSL::X509::Certificate.new(File.read(CERTIFICATE))
-      intermediate_certificate = OpenSSL::X509::Certificate.new(File.read(INTERMEDIATE_CERTIFICATE))
-      private_key = OpenSSL::PKey::RSA.new(File.read(PRIVATE_KEY)) # Or use PKey::EC if using EC key
+      p12_certificate = OpenSSL::X509::Certificate.new(File.read(CERTIFICATE,'rb'))
+      intermediate_certificate = OpenSSL::X509::Certificate.new(File.read(INTERMEDIATE_CERTIFICATE,'rb'))
+      private_key = OpenSSL::PKey::RSA.new(File.read(PRIVATE_KEY,'rb')) # Or use PKey::EC if using EC key
 
       flag = OpenSSL::PKCS7::DETACHED | OpenSSL::PKCS7::BINARY
     #  signed = OpenSSL::PKCS7.sign(p12_certificate.certificate,
