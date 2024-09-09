@@ -149,7 +149,7 @@ module Passkit
         )
 
       @signature_url = @temporary_path.join("signature")
-      File.open(@signature_url, "w") { |f| f.syswrite signed.to_der }
+      File.open(@signature_url, "wb") { |f| f.write(signed.to_der) }
     end
 
     # :nocov:
