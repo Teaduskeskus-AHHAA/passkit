@@ -139,7 +139,7 @@ module Passkit
     #  signed = OpenSSL::PKCS7.sign(p12_certificate.certificate,
     #    p12_certificate.key, File.read(@manifest_url),
     #    [intermediate_certificate], flag)
-
+        puts  File.read(@manifest_url)
         signed = OpenSSL::PKCS7.sign(
           p12_certificate, # Certificate
           private_key,     # Private key
