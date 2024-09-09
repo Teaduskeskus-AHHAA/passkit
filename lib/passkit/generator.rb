@@ -170,5 +170,6 @@ module Passkit
       end
     
       zip_path
+    end
   end
 end
